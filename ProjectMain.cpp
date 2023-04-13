@@ -113,7 +113,7 @@ void registration() //for when you want to add someone to the system
     ofstream f1("record.txt", ios::app); //ofstream allows us to write in the record.txt file -class - edit
     //ios::app is used to NOT discard contents of the file -
     //allows us to reference this file even after we close the program
-    //ios just describes the opneing of a file and the suffix descibes
+    //ios just describes the opening of a file and the suffix describes
     //what the action is
     f1<<ruserId<<' '<<rpassword<<endl;
     system("cls");
