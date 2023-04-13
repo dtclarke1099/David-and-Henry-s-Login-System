@@ -1,6 +1,3 @@
-//
-// Created by dclar on 4/12/2023.
-//
 #include <iostream>
 #include <fstream>
 using namespace std;
@@ -48,7 +45,8 @@ int main() {
 
 
         case 4:
-            cout<<" \nThank you for choosing David and Henry's Login Service";
+            cout<<" \nThank you for choosing David and Henry's Login Service\n";
+            terminate();
 
 
 
@@ -59,39 +57,44 @@ int main() {
 }
 void login() //when the user is already included in the system
 {
-    int count;
-    string userId, password, id, pass;
-    system("cls"); //clear screen
-    cout<<" Please enter the username and password : "<<endl;
-    cout<<" USERNAME ";
-    cin>>userId;
-    cout<<" PASSWORD ";
-    cin>>password;
+    int loginAttempt = 0;
+    while (loginAttempt < 5) {
+        int count;
+        string userId, password, id, pass;
+        cout << " Please enter the username and password : " << endl;
+        cout << " USERNAME ";
+        cin >> userId;
+        cout << " PASSWORD ";
+        cin >> password;
 
 
 
-    ifstream input("record.txt"); //ifstream class used to check the file -class - allows you to read the file
+        ifstream input("record.txt"); //ifstream class used to check the file -class - allows you to read the file
 
 
 
-    while(input>>id>>pass) {
-        if (id == userId && pass == password) {
-            count = 1;
-            system("cls");
+        while (input >> id >> pass) {
+            if (id == userId && pass == password) {
+                count = 1;
+                system("cls");
+            }
+        }
+        input.close();
+        if (count == 1) {
+            cout << userId << "\nYour LOGIN was successful!\n";
+            main();
+        } else {
+            cout << "\nLOGIN FAILED -  Please check your username & password\n";
+            loginAttempt++;
         }
     }
-    input.close();
-    if (count==1){
-        cout<<userId<<"\nYour LOGIN was successful!\n";
-        main();
+    if (loginAttempt == 5) {
+        cout << "\nToo many login attempts - Goodbye\n";
+        terminate();
+
+
+
     }
-    else{
-        cout<<"\nLOGIN FAILED  Please check your username & password";
-        main();
-    }
-
-
-
 }
 
 
@@ -124,9 +127,9 @@ void forgot() //for when you forgot your password
 {
     int option;
     system("cls");
-    cout<<" Forgot Password?";
-    cout<<" Press 1 to search ID by Username: "<<endl;
-    cout<<" Press 2 to return to main menu: "<<endl;
+    cout<<" Forgot Password?\n";
+    cout<<" Press 1 to search ID by Username: \n";
+    cout<<" Press 2 to return to main menu: \n";
     cout<<" Enter decision: ";
     cin>>option;
     switch(option)
@@ -168,4 +171,5 @@ void forgot() //for when you forgot your password
             cout<<" Invalid option. Please re-enter choice";
             forgot();
     }
+}
 }
