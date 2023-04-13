@@ -11,20 +11,20 @@ void forgot();
 
 
 int main() {
-    int c; //"c" for choice;
+    int choice; //"c" for choice;
     cout << "             David & Henry's Login Service               ";
     cout << "\n__________________      Menu      _______________________\n";
-    cout << " Press 1 to LOGIN              " << endl;
-    cout << " Press 2 to REGISTER           " << endl;
-    cout << " Press 3 to RESET PASSWORD     " << endl;
-    cout << " Press 4 to EXIT               " << endl;
+    cout << " Press 1 to LOGIN              \n";
+    cout << " Press 2 to REGISTER           \n";
+    cout << " Press 3 to RESET PASSWORD     \n";
+    cout << " Press 4 to EXIT               \n";
     cout << " Please enter your choice: ";
-    cin>>c;
+    cin>>choice;
     cout<<endl;
 
 
 
-    switch(c)
+    switch(choice)
     {
         case 1:
             login();
@@ -59,7 +59,7 @@ void login() //when the user is already included in the system
 {
     int loginAttempt = 0;
     while (loginAttempt < 5) {
-        int count;
+        int yesNo;
         string userId, password, id, pass;
         cout << " Please enter the username and password : " << endl;
         cout << " USERNAME ";
@@ -69,18 +69,21 @@ void login() //when the user is already included in the system
 
 
 
-        ifstream input("record.txt"); //ifstream class used to check the file -class - allows you to read the file
+        ifstream input("record.txt");
+        //ifstream class used to check the file -class - allows you to read the file
+        //read through the text, find username and password pair
 
 
 
         while (input >> id >> pass) {
             if (id == userId && pass == password) {
-                count = 1;
+                yesNo = 1;
                 system("cls");
+                //compares the inputted username and password to the ones in the file matches
             }
         }
         input.close();
-        if (count == 1) {
+        if (yesNo == 1) {
             cout << userId << "\nYour LOGIN was successful!\n";
             main();
         } else {
@@ -110,7 +113,8 @@ void registration() //for when you want to add someone to the system
 
 
 
-    ofstream f1("record.txt", ios::app); //ofstream allows us to write in the record.txt file -class - edit
+    ofstream f1("record.txt", ios::app);
+    //ofstream allows us to write in the record.txt file -class - edit
     //ios::app is used to NOT discard contents of the file -
     //allows us to reference this file even after we close the program
     //ios just describes the opening of a file and the suffix describes
@@ -136,7 +140,7 @@ void forgot() //for when you forgot your password
     {
         case 1:
         {
-            int count = 0;
+            int yesNo = 0;
             string suserId, sId, spass;
             cout<<" Enter your username: ";
             cin>>suserId;
@@ -148,11 +152,11 @@ void forgot() //for when you forgot your password
             {
                 if(sId==suserId)
                 {
-                    count = 1;
+                    yesNo = 1;
                 }
             }
             f2.close();
-            if(count==1){
+            if(yesNo==1){
                 cout<<" Your account is registered! ";
                 cout<<" Your password is: "<<spass;
                 main();
@@ -171,5 +175,4 @@ void forgot() //for when you forgot your password
             cout<<" Invalid option. Please re-enter choice";
             forgot();
     }
-}
 }
